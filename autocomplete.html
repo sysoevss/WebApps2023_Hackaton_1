@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>  
+<link href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+<script>
+$(document).ready(function () {
+
+    //
+    // Set autocompletes
+    //
+    options = ["собака", "кошка", "конь", "жираф"];
+    $("#input1").autocomplete({
+        source: options,
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete('search', $(this).val());
+    });      
+    $("#input2").autocomplete({
+        source: options,
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete('search', $(this).val());
+    });          
+
+    //
+    // Open dialog window
+    //
+    $("#but1").click(function (e) {
+        e.preventDefault();
+        // dialog
+        var dialog = $('#modal1').dialog({
+        width: 300,
+        autoOpen: false,
+        modal: true,
+        zIndex: 9998,
+        stack: false,
+        closeText: "X",
+        show: {
+            effect: "blind",
+            duration: 100
+        },
+        hide: {
+            effect: "blind",
+            duration: 100
+        },
+        buttons: {            
+            "Отмена": function() {
+              dialog.dialog( "close" );
+            }
+        },    
+        close: function() {
+            
+        }    
+        });
+        dialog.dialog('open');
+        });
+});
+</script>  
+</head>
+
+<body>
+<!-- input on the main page -->
+<input id="input1"></input>
+<input type="button" id="but1" value="Press me!"></input>
+
+<!-- Modal window -->
+<div id="modal1" style="display:none;">    
+    <input id="input2"></input>        
+    <p> Autocomplete doesn't show here! </p> 
+</div>  
+
+</body>
+</html>
